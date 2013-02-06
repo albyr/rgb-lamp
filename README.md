@@ -1,4 +1,4 @@
 rgb-lamp
 ========
 
-A multicoloured lamp powered by Arduino
+A colour-changing lamp powered by Arduino.
