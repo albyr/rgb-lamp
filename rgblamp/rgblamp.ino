@@ -8,9 +8,12 @@
 // Counter
 int i=0;
 // Brightness values
-int rBright=0;
-int gBright=0;
-int bBright=0;
+int rBrightNew=0;
+int gBrightNew=0;
+int bBrightNew=0;
+int rBrightOld=0;
+int gBrightOld=0;
+int bBrightOld=0;
 // Brightness compensation values, to even out differing LEDs
 int rMax=256;
 int gMax=256;
@@ -31,9 +34,9 @@ void setup()
 void loop()
 {
   // Decide on brightness values
-  rBright = random(rMax);
-  gBright = random(gMax);
-  bBright = random(bMax);
+  rBrightNew = random(rMax);
+  gBrightNew = random(gMax);
+  bBrightNew = random(bMax);
   // Output RGB values for debugging
   Serial.println("R:");
   Serial.println(rBright);
