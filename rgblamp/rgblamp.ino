@@ -14,15 +14,16 @@ int bBrightNew=255;
 int rBrightOld=255;
 int gBrightOld=255;
 int bBrightOld=255;
+int totalBrightness=0;
+int minBrightness=512;
 // Brightness compensation values, to even out differing LEDs
 int rMax=256;
 int gMax=256;
 int bMax=256;
 // Fade rate control
-int fadeDelay=20;
+int fadeDelay=5;
 
-void setup()
-{
+void setup() {
   // Set up pins
   pinMode(rLED, OUTPUT);
   pinMode(gLED, OUTPUT);
@@ -33,34 +34,30 @@ void setup()
   Serial.begin(9600);
 }
 
-void loop()
-{
-  // Debugging output
-  // Serial.println("R: " + String(rBrightNew));
-  // Serial.println("G: " + String(gBrightNew));
-  // Serial.println("B: " + String(bBrightNew));
-  // Create random brightness values
-  rBrightNew = random(rMax);
-  gBrightNew = random(gMax);
-  bBrightNew = random(bMax);
+void loop() {
+  // Create random brightness values and check if lamp is going to be too dim
+  do {
+    rBrightNew = random(rMax);
+    gBrightNew = random(gMax);
+    bBrightNew = random(bMax);
+    totalBrightness = rBrightNew + gBrightNew + bBrightNew;
+  } 
+  while (totalBrightness <= minBrightness);
+  Serial.println("Loop");
   // Begin colour-cycling
   // Compare current and new brightness of red LED
-  if (rBrightNew <= rBrightOld)
-  {
+  if (rBrightNew <= rBrightOld) {
     // Decrease brightness if new brightness < old brightness
-    for (i=rBrightOld; i>=rBrightNew; i--)
-    {
+    for (i=rBrightOld; i>=rBrightNew; i--) {
       analogWrite(rLED, i);
       delay(fadeDelay);
     }
     // Store current brightness as old brightness
     rBrightOld = rBrightNew;
   }
-  else
-  {
+  else {
     // Increase brightness if new brightness > old brightness
-    for (i=rBrightOld; i<=rBrightNew; i++)
-    {
+    for (i=rBrightOld; i<=rBrightNew; i++) {
       analogWrite(rLED, i);
       delay(fadeDelay);
     }
@@ -68,46 +65,37 @@ void loop()
     rBrightOld = rBrightNew;
   }
   // Compare current and new brightness of green LED
-  if (gBrightNew <= gBrightOld)
-  {
+  if (gBrightNew <= gBrightOld) {
     // Decrease brightness if new brightness < old brightness
-    for (i=gBrightOld; i>=gBrightNew; i--)
-    {
+    for (i=gBrightOld; i>=gBrightNew; i--) {
       analogWrite(gLED, i);
       delay(fadeDelay);
     }
     // Store current brightness as old brightness
     gBrightOld = gBrightNew;
   }
-  else
-  {
+  else {
     // Increase brightness if new brightness > old brightness
-    for (i=gBrightOld; i<=gBrightNew; i++)
-    {
+    for (i=gBrightOld; i<=gBrightNew; i++) {
       analogWrite(gLED, i);
       delay(fadeDelay);
     }
     // Store current brightness as old brightness
     gBrightOld = gBrightNew;
   }
-  
   // Compare current and new brightness of red LED
-  if (bBrightNew <= bBrightOld)
-  {
+  if (bBrightNew <= bBrightOld) {
     // Decrease brightness if new brightness < old brightness
-    for (i=bBrightOld; i>=bBrightNew; i--)
-    {
+    for (i=bBrightOld; i>=bBrightNew; i--) {
       analogWrite(bLED, i);
       delay(fadeDelay);
     }
     // Store current brightness as old brightness
     bBrightOld = bBrightNew;
   }
-  else
-  {
+  else {
     // Increase brightness if new brightness > old brightness
-    for (i=bBrightOld; i<=bBrightNew; i++)
-    {
+    for (i=bBrightOld; i<=bBrightNew; i++) {
       analogWrite(bLED, i);
       delay(fadeDelay);
     }
@@ -117,3 +105,4 @@ void loop()
   // Debugging output
   // Serial.println("Cycle ended.");
 }
+
