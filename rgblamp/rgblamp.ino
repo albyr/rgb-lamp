@@ -15,9 +15,9 @@ int rBrightOld=255;
 int gBrightOld=255;
 int bBrightOld=255;
 // Brightness compensation values, to even out differing LEDs
-int rMax=256;
+int rMax=128;
 int gMax=256;
-int bMax=256;
+int bMax=128;
 // Fade rate control
 int fadeDelay=20;
 
