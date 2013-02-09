@@ -8,12 +8,12 @@
 // Counter
 int i=0;
 // Brightness values
-int rBrightNew=0;
-int gBrightNew=0;
-int bBrightNew=0;
-int rBrightOld=0;
-int gBrightOld=0;
-int bBrightOld=0;
+int rBrightNew=255;
+int gBrightNew=255;
+int bBrightNew=255;
+int rBrightOld=255;
+int gBrightOld=255;
+int bBrightOld=255;
 // Brightness compensation values, to even out differing LEDs
 int rMax=256;
 int gMax=256;
@@ -38,44 +38,26 @@ void loop()
   gBrightNew = random(gMax);
   bBrightNew = random(bMax);
   // Output RGB values for debugging
-  Serial.println("R: " + String(rBrightNew));
-  Serial.println("G: " + String(gBrightNew));
-  Serial.println("B: " + String(bBrightNew));
-  Serial.println("---");
-  // Fade in red
-  for (i=0; i<rBrightNew; i++)
+  // Serial.println("R: " + String(rBrightNew));
+  // Serial.println("G: " + String(gBrightNew));
+  // Serial.println("B: " + String(bBrightNew));
+  // Serial.println("---");
+  if (rBrightNew <= rBrightOld)
   {
+    // Decrease brightness
+    for (i=rBrightOld; i>rBrightNew; i--)
+    {
     analogWrite(rLED, i);
     delay(fadeDelay);
+    }
   }
-  // Fade in green
-  for (i=0; i<gBrightNew; i++)
+  else
   {
-    analogWrite(gLED, i);
-    delay(fadeDelay);
-  }
-  // Fade in blue
-  for (i=0; i<bBrightNew; i++)
-  {
-    analogWrite(bLED, i);
-    delay(fadeDelay);
-  }
-  // Fade out red
-  for (i=rBrightNew; i>0; i--)
-  {
+    // Increase brightness
+    for (i=rBrightOld; i<rBrightNew; i++)
+    {
     analogWrite(rLED, i);
     delay(fadeDelay);
-  }
-  // Fade out green
-  for (i=gBrightNew; i>0; i--)
-  {
-    analogWrite(gLED, i);
-    delay(fadeDelay);
-  }
-  // Fade out blue
-  for (i=bBrightNew; i>0; i--)
-  {
-    analogWrite(bLED, i);
-    delay(fadeDelay);
+    }
   }
 }
