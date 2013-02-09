@@ -38,45 +38,42 @@ void loop()
   gBrightNew = random(gMax);
   bBrightNew = random(bMax);
   // Output RGB values for debugging
-  Serial.println("R:");
-  Serial.println(rBright);
-  Serial.println("G:");
-  Serial.println(gBright);
-  Serial.println("B:");
-  Serial.println(bBright);
+  Serial.println("R: " + String(rBrightNew));
+  Serial.println("G: " + String(gBrightNew));
+  Serial.println("B: " + String(bBrightNew));
   Serial.println("---");
   // Fade in red
-  for (i=0; i<rBright; i++)
+  for (i=0; i<rBrightNew; i++)
   {
     analogWrite(rLED, i);
     delay(fadeDelay);
   }
   // Fade in green
-  for (i=0; i<gBright; i++)
+  for (i=0; i<gBrightNew; i++)
   {
     analogWrite(gLED, i);
     delay(fadeDelay);
   }
   // Fade in blue
-  for (i=0; i<bBright; i++)
+  for (i=0; i<bBrightNew; i++)
   {
     analogWrite(bLED, i);
     delay(fadeDelay);
   }
   // Fade out red
-  for (i=rBright; i>0; i--)
+  for (i=rBrightNew; i>0; i--)
   {
     analogWrite(rLED, i);
     delay(fadeDelay);
   }
   // Fade out green
-  for (i=gBright; i>0; i--)
+  for (i=gBrightNew; i>0; i--)
   {
     analogWrite(gLED, i);
     delay(fadeDelay);
   }
   // Fade out blue
-  for (i=bBright; i>0; i--)
+  for (i=bBrightNew; i>0; i--)
   {
     analogWrite(bLED, i);
     delay(fadeDelay);
