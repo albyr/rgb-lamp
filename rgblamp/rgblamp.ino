@@ -15,13 +15,13 @@ int rBrightOld=255;
 int gBrightOld=255;
 int bBrightOld=255;
 int totalBrightness=0;
-int minBrightness=512;
+int minBrightness=461;
 // Brightness compensation values, to even out differing LEDs
 int rMax=256;
 int gMax=256;
 int bMax=256;
 // Fade rate control
-int fadeDelay=5;
+int fadeDelay=25;
 
 void setup() {
   // Set up pins
