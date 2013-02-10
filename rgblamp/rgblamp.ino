@@ -43,7 +43,6 @@ void loop() {
     totalBrightness = rBrightNew + gBrightNew + bBrightNew;
   } 
   while (totalBrightness <= minBrightness);
-  Serial.println("Loop");
   // Begin colour-cycling
   // Compare current and new brightness of red LED
   if (rBrightNew <= rBrightOld) {
